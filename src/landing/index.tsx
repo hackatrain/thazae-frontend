@@ -164,20 +164,30 @@ const NextButton = styled.button`
   }
 `
 
+const StationSelector = ({index, incr}) => (
+  <>
+    <LineBackdrop />
+    <StationNode y={10} idx={index - 2} onClick={() => incr(-2)} />
+    <StationNode y={25} idx={index - 1} onClick={() => incr(-1)} />
+    <StationNode y={70} idx={index + 1} onClick={() => incr(+1)} />
+    <StationNode y={85} idx={index + 2} onClick={() => incr(+2)} />
+  </>
+)
+
+// function next() {
+//   if (stationIndex > metroStations.length) {
+//     setStationIndex(0)
+//     return
+//   }
+
+//   setStationIndex(stationIndex + 1)
+// }
+
 export const Landing = ({path = ''}) => {
   const [stationIndex, setStationIndex] = useState(0)
   const [curry, setCurry] = useState(null)
 
   const station = metroStations[stationIndex || 0]
-
-  function next() {
-    if (stationIndex > metroStations.length) {
-      setStationIndex(0)
-      return
-    }
-
-    setStationIndex(stationIndex + 1)
-  }
 
   function randomize() {
     if (station) {
@@ -199,31 +209,7 @@ export const Landing = ({path = ''}) => {
 
   return (
     <Backdrop>
-      <LineBackdrop />
-
-      <StationNode
-        y={10}
-        idx={stationIndex - 2}
-        onClick={() => incrStation(-2)}
-      />
-
-      <StationNode
-        y={25}
-        idx={stationIndex - 1}
-        onClick={() => incrStation(-1)}
-      />
-
-      <StationNode
-        y={70}
-        idx={stationIndex + 1}
-        onClick={() => incrStation(+1)}
-      />
-
-      <StationNode
-        y={85}
-        idx={stationIndex + 2}
-        onClick={() => incrStation(+2)}
-      />
+      <StationSelector incr={incrStation} index={stationIndex} />
 
       <TripCard data={curry} station={station} />
 
