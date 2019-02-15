@@ -94,8 +94,11 @@ export function TripCard({data, station}: TripCardProps) {
         <Avatar src={FF_BASE + data.image} />
 
         <Name>{data.name}</Name>
-        <Info>{numberWithCommas(data.cost)} THB</Info>
-        <Info>{data.age} y/o</Info>
+        <Info>
+          <div>{numberWithCommas(data.cost)} THB</div>
+          <div>{data.age} y/o</div>
+          <div>{data.lineID}</div>
+        </Info>
       </CardContent>
     </Card>
   )

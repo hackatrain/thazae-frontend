@@ -129,7 +129,7 @@ export const Landing = ({path = ''}) => {
       <TripCard data={curry} station={station} />
 
       <NextButton onClick={randomize}>
-        <Icon type="arrow-right" style={{fontSize: 20}} />
+        <Icon type="thunderbolt" style={{fontSize: 20}} />
       </NextButton>
     </Backdrop>
   )
