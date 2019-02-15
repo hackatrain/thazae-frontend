@@ -1,19 +1,235 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from '@emotion/styled'
 
-import {TripCard} from '../trip-card'
+import curryList from '../curry/result'
 
-const Container = styled.div`
+import {TripCard} from '../trip-card'
+import {Seller} from '../curry'
+import {Icon} from 'antd'
+
+const Backdrop = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  height: 100vh;
+  min-height: 360px;
+  width: 100%;
+
+  background: #f7f7f7;
+`
+
+const LineBackdrop = styled.div`
+  position: absolute;
+  top: 50%;
+
+  opacity: 0.5;
+  width: 100%;
+  height: 10px;
+  background: white;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+`
+
+interface CircleProps {
+  y: number
+}
+
+const StationCircle = styled.div`
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 2em;
-  max-width: 1000px;
-  margin: 0 auto;
+  position: absolute;
+  top: calc(50% - 1.1em);
+  left: ${(props: CircleProps) => props.y || 20}%;
+
+  width: 3em;
+  height: 3em;
+
+  border-radius: 50%;
+  background: linear-gradient(45deg, #3c8ce7, #00eaff);
+
+  transition: 1s cubic-bezier(0.22, 0.61, 0.36, 1) all;
+
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    transform: scale(1.15);
+    background: linear-gradient(45deg, #ed1c24, #fcee21);
+  }
+`
+
+const StationInnerCircle = styled.div`
+  background: white;
+  width: 2.3em;
+  height: 2.3em;
+  border-radius: 50%;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+`
+
+function random<T>(list: T[]): T {
+  return list[Math.floor(Math.random() * list.length)]
+}
+
+function curryAt(location: string) {
+  return curryList.filter(c => c.location.includes(location))
+}
+
+function randomCurryAt(location: string): Seller {
+  return random(curryAt(location))
+}
+
+function randomMetroCurry(): Seller {
+  const curries = curryList.filter(c => c.location.includes('MRT'))
+
+  return random(curries)
+}
+
+const metroStations = [
+  // 'หัวลำโพง',
+  // 'สามย่าน',
+  // 'สีลม',
+  // 'ลุมพินี',
+  'คลองเตย',
+  // 'ศูนย์การประชุมแห่งชาติ',
+  'สุขุมวิท',
+  // 'เพชรบุรี',
+  'พระราม 9',
+  // 'ศูนย์วัฒนธรรม',
+  'ห้วยขวาง',
+  'สุทธิสาร',
+  'รัชดาภิเษก',
+  'ลาดพร้าว',
+  'พหลโยธิน',
+  'สวนจตุจักร',
+  // 'กำแพงเพชร',
+  'บางซื่อ',
+  // 'เตาปูน',
+]
+
+const StationTitle = styled.div`
+  position: absolute;
+
+  color: #444;
+  font-size: 22px;
+
+  top: 60px;
+  pointer-events: none;
+  text-align: center;
+  white-space: pre;
+`
+
+type StationNodeProps = {
+  idx: number
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+} & CircleProps
+
+const StationNode = ({y, idx, onClick}: StationNodeProps) => (
+  <StationCircle y={y} onClick={onClick}>
+    <StationInnerCircle />
+
+    <StationTitle>{metroStations[idx]}</StationTitle>
+  </StationCircle>
+)
+
+const NextButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4em;
+  height: 4em;
+  border: 5px solid white;
+  box-shadow: 0px 7px 28px rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+
+  position: relative;
+  bottom: -40px;
+
+  color: white;
+  outline: none;
+  cursor: pointer;
+  background: #2ecc71;
+  transition: 1s cubic-bezier(0.22, 0.61, 0.36, 1) all;
+
+  &:hover {
+    background: #27ae60;
+    transform: scale(1.2);
+  }
 `
 
 export const Landing = ({path = ''}) => {
-  return <TripCard />
+  const [stationIndex, setStationIndex] = useState(0)
+  const [curry, setCurry] = useState(null)
+
+  const station = metroStations[stationIndex || 0]
+
+  function next() {
+    if (stationIndex > metroStations.length) {
+      setStationIndex(0)
+      return
+    }
+
+    setStationIndex(stationIndex + 1)
+  }
+
+  function randomize() {
+    if (station) {
+      const curry = randomCurryAt(station)
+
+      setCurry(curry)
+    }
+  }
+
+  useEffect(randomize, [station])
+
+  const incrStation = (n: number) => {
+    const nextIndex = stationIndex + n
+
+    if (nextIndex > metroStations.length || nextIndex < 0) return
+
+    setStationIndex(nextIndex)
+  }
+
+  return (
+    <Backdrop>
+      <LineBackdrop />
+
+      <StationNode
+        y={10}
+        idx={stationIndex - 2}
+        onClick={() => incrStation(-2)}
+      />
+
+      <StationNode
+        y={25}
+        idx={stationIndex - 1}
+        onClick={() => incrStation(-1)}
+      />
+
+      <StationNode
+        y={70}
+        idx={stationIndex + 1}
+        onClick={() => incrStation(+1)}
+      />
+
+      <StationNode
+        y={85}
+        idx={stationIndex + 2}
+        onClick={() => incrStation(+2)}
+      />
+
+      <TripCard data={curry} station={station} />
+
+      <NextButton onClick={randomize}>
+        <Icon type="arrow-right" style={{fontSize: 20}} />
+      </NextButton>
+    </Backdrop>
+  )
 }

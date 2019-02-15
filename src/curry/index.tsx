@@ -8,7 +8,7 @@ import './index.css'
 
 type InputChange = React.ChangeEvent<HTMLInputElement>
 
-interface Seller {
+export interface Seller {
   name: string
   age: number
   gender: string
