@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import {Seller} from '../curry'
-import {getDefaultDecoratorFromObjectOptions} from 'mobx/lib/internal'
 
 const Card = styled.a`
   display: flex;
@@ -24,6 +23,10 @@ const Card = styled.a`
   &:hover {
     transform: scale(1.08);
     box-shadow: 0px 7px 28px rgba(0, 0, 0, 0.16);
+
+    .x-card-title {
+      background: linear-gradient(45deg, #3a3897, #a3a1ff);
+    }
   }
 `
 
@@ -81,7 +84,6 @@ const CardTitle = styled.div`
   font-size: 0.85em;
   font-weight: 500;
 
-  /* background: linear-gradient(45deg, #3a3897, #a3a1ff); */
   background: linear-gradient(45deg, #3c8ce7, #00eaff);
 `
 
@@ -99,7 +101,9 @@ export function TripCard({data, station}: TripCardProps) {
 
   return (
     <Card href={POST_URL + data.name} target="_blank">
-      <CardTitle>{station || getLocation(data.location)}</CardTitle>
+      <CardTitle className="x-card-title">
+        {station || getLocation(data.location)}
+      </CardTitle>
 
       <CardContent>
         <Avatar src={FF_BASE + data.image} />
