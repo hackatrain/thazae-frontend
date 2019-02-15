@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import locations from '../thailand-location'
 import {AirQualityMap} from '../pm-map'
+import {AirQualityCard} from '../air-quality-card'
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const Container = styled.div`
 export const Landing = ({path = ''}) => {
   return (
     <Container>
-      <AirQualityMap data={locations} />
+      <AirQualityCard />
     </Container>
   )
 }

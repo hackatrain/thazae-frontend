@@ -6,24 +6,29 @@ import {keyframes} from '@emotion/core'
   Pin Colors are defined here.
 */
 
-type AirQuality = 'excellent' | 'good' | 'medium' | 'bad' | 'hazardous'
+type AirQuality =
+  | 'excellent'
+  | 'moderate'
+  | 'unhealthy'
+  | 'very-unhealthy'
+  | 'hazardous'
 
 export const getAirQuality = (aqi: number): AirQuality => {
   if (aqi <= 25) return 'excellent'
-  if (aqi <= 50) return 'good'
-  if (aqi <= 100) return 'medium'
-  if (aqi <= 200) return 'bad'
+  if (aqi <= 50) return 'moderate'
+  if (aqi <= 100) return 'unhealthy'
+  if (aqi <= 200) return 'very-unhealthy'
   if (aqi > 201) return 'hazardous'
 
-  return 'medium'
+  return 'unhealthy'
 }
 
 // prettier-ignore
 export const getPinColor = (type: AirQuality): string => {
   if (type === 'excellent') return '#00cae9'
-  if (type === 'good') return '#2ecc71'
-  if (type === 'medium') return '#f1c40f'
-  if (type === 'bad') return '#e67e22'
+  if (type === 'moderate') return '#2ecc71'
+  if (type === 'unhealthy') return '#f1c40f'
+  if (type === 'very-unhealthy') return '#e67e22'
   if (type === 'hazardous') return '#e74c3c'
 
   return '#2c3e50'
@@ -32,9 +37,9 @@ export const getPinColor = (type: AirQuality): string => {
 // prettier-ignore
 export const getPinHoverColor = (type: AirQuality): string => {
   if (type === 'excellent') return '#3498db'
-  if (type === 'good') return '#27ae60'
-  if (type === 'medium') return '#f1c40f'
-  if (type === 'bad') return '#e67e22'
+  if (type === 'moderate') return '#27ae60'
+  if (type === 'unhealthy') return '#f1c40f'
+  if (type === 'very-unhealthy') return '#e67e22'
   if (type === 'hazardous') return '#c0392b'
 
   return '#2c3e50'
