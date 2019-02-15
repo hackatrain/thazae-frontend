@@ -75,13 +75,17 @@ const StationTitle = styled.div`
   white-space: pre;
 `
 
-export const StationNode = ({y, name, onClick}: StationNodeProps) => (
-  <StationCircle y={y} onClick={onClick}>
-    <StationInnerCircle />
+export const StationNode = ({y, name, onClick}: StationNodeProps) => {
+  if (!name) return null
 
-    <StationTitle>{name}</StationTitle>
-  </StationCircle>
-)
+  return (
+    <StationCircle y={y} onClick={onClick}>
+      <StationInnerCircle />
+
+      <StationTitle>{name}</StationTitle>
+    </StationCircle>
+  )
+}
 
 interface StationSelectorProps {
   index: number
