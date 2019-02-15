@@ -27,7 +27,9 @@ export const Curry = ({path = ''}) => {
 
   const handleChange = (e: InputChange) => setName(e.target.value)
 
-  const list = getDataset().filter(curry => curry.name.includes(name))
+  const list = getDataset().filter(
+    curry => curry.name.includes(name) || curry.location.includes(name),
+  )
   // .filter(x => x.age <= 20)
 
   return (
@@ -44,7 +46,13 @@ export const Curry = ({path = ''}) => {
             <div>Age: {curry.age}</div>
             <div>Cost: {curry.cost}</div>
             <div>Gender: {curry.gender}</div>
-            <div>Location: {curry.location}</div>
+            <div>
+              Location:{' '}
+              {curry.location
+                .split(',')
+                .map(x => x.trim())
+                .join(' 𐄁 ')}
+            </div>
             <div>Line ID: {curry.lineID}</div>
 
             <img
