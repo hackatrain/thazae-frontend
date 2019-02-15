@@ -4,12 +4,14 @@ import styled from '@emotion/styled'
 import {Seller} from '../curry'
 import {getDefaultDecoratorFromObjectOptions} from 'mobx/lib/internal'
 
-const Card = styled.div`
+const Card = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+
+  text-decoration: none;
 
   font-size: 2em;
   background: #ffffff;
@@ -17,6 +19,12 @@ const Card = styled.div`
   border-radius: 6px;
   width: 95%;
   max-width: 300px;
+  transition: 1s cubic-bezier(0.22, 0.61, 0.36, 1) all;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 7px 28px rgba(0, 0, 0, 0.16);
+  }
 `
 
 const Avatar = styled.img`
@@ -43,6 +51,7 @@ const Info = styled.div`
   color: #666;
   font-weight: 300;
   margin-top: 0.3em;
+  font-size: 0.85em;
 `
 
 interface TripCardProps {
@@ -83,11 +92,13 @@ function getLocation(location: string) {
     .find(x => x.includes('MRT'))
 }
 
+const POST_URL = FF_BASE + '/post/'
+
 export function TripCard({data, station}: TripCardProps) {
   if (!data) return null
 
   return (
-    <Card>
+    <Card href={POST_URL + data.name} target="_blank">
       <CardTitle>{station || getLocation(data.location)}</CardTitle>
 
       <CardContent>
