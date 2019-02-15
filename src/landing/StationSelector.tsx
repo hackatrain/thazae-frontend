@@ -8,7 +8,7 @@ interface CircleProps {
 }
 
 type StationNodeProps = {
-  idx: number
+  name: string
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 } & CircleProps
 
@@ -71,11 +71,11 @@ const StationTitle = styled.div`
   white-space: pre;
 `
 
-export const StationNode = ({y, idx, onClick}: StationNodeProps) => (
+export const StationNode = ({y, name, onClick}: StationNodeProps) => (
   <StationCircle y={y} onClick={onClick}>
     <StationInnerCircle />
 
-    <StationTitle>{metroStations[idx]}</StationTitle>
+    <StationTitle>{name}</StationTitle>
   </StationCircle>
 )
 
@@ -84,13 +84,17 @@ interface StationSelectorProps {
   incr: (by: number) => void
 }
 
-export const StationSelector = ({index, incr}: StationSelectorProps) => (
-  <>
-    <LineBackdrop />
+export const StationSelector = ({index, incr}: StationSelectorProps) => {
+  const t = (n: number) => metroStations[index + n]
 
-    <StationNode y={10} idx={index - 2} onClick={() => incr(-2)} />
-    <StationNode y={25} idx={index - 1} onClick={() => incr(-1)} />
-    <StationNode y={70} idx={index + 1} onClick={() => incr(+1)} />
-    <StationNode y={85} idx={index + 2} onClick={() => incr(+2)} />
-  </>
-)
+  return (
+    <>
+      <LineBackdrop />
+
+      <StationNode y={10} name={t(-2)} onClick={() => incr(-2)} />
+      <StationNode y={25} name={t(-1)} onClick={() => incr(-1)} />
+      <StationNode y={70} name={t(1)} onClick={() => incr(1)} />
+      <StationNode y={85} name={t(2)} onClick={() => incr(2)} />
+    </>
+  )
+}
