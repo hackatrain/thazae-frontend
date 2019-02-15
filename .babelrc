@@ -1,3 +1,14 @@
 {
-  "presets": ["react-app"]
+  "presets": ["@babel/preset-react"],
+  "plugins": [
+    "transform-inline-environment-variables",
+    "emotion",
+    ["import", { "libraryName": "antd" }],
+    [
+      "@babel/plugin-proposal-decorators",
+      { "legacy": false, "decoratorsBeforeExport": true }
+    ],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "recharts"
+  ]
 }

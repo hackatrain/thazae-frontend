@@ -1,16 +1,30 @@
 {
-  "name": "parcel-react-example",
+  "name": "hackatrain-thazae-frontend",
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development parcel src/index.html ",
-    "build": "cross-env NODE_ENV=production parcel build src/index.html --no-minify --public-url /"
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url /"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.6",
+    "@emotion/styled": "^10.0.6",
+    "@reach/router": "^1.2.1",
+    "@types/parcel-env": "^0.0.0",
+    "antd": "^3.13.0",
     "autoprefixer": "^7.2.1",
-    "babel-preset-react-app": "^3.1.0",
-    "parcel-bundler": "latest",
-    "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1"
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "mobx-react-lite": "^0.3.6",
+    "parcel-bundler": "^1.11.0",
+    "polished": "^2.3.3",
+    "ramda": "^0.26.1",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2",
+    "react-ink": "^6.4.0",
+    "react-spinkit": "^3.0.0",
+    "recharts": "^1.4.2"
   },
   "postcss": {
     "modules": false,
@@ -27,9 +41,37 @@
     }
   },
   "devDependencies": {
-    "@types/react": "^16.7.20",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/preset-react": "^7.0.0",
+    "@types/gapi": "^0.0.36",
+    "@types/gapi.auth2": "^0.0.48",
+    "@types/ramda": "^0.25.47",
+    "@types/reach__router": "^1.2.3",
+    "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
+    "@types/react-spinkit": "^3.0.5",
+    "@types/recharts": "^1.1.10",
+    "@typescript-eslint/eslint-plugin": "^1.1.1",
+    "@typescript-eslint/parser": "^1.1.1",
+    "babel-plugin-emotion": "^10.0.6",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-recharts": "^1.2.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "cross-env": "^5.1.1",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "prettier": "^1.16.1",
+    "prettier-tslint": "^0.4.2",
+    "sass": "^1.16.1",
     "typescript": "^3.2.4"
   }
 }
