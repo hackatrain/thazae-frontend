@@ -17,9 +17,5 @@ const Container = styled.div`
 `
 
 export const Landing = ({path = ''}) => {
-  return (
-    <Container>
-      <AirQualityCard />
-    </Container>
-  )
+  return <AirQualityCard />
 }
