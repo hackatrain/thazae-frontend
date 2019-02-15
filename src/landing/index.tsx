@@ -6,6 +6,7 @@ import curryList from '../curry/result'
 import {TripCard} from '../trip-card'
 import {Seller} from '../curry'
 import {Icon} from 'antd'
+import {StationSelector} from './StationSelector'
 
 const Backdrop = styled.div`
   display: flex;
@@ -20,57 +21,6 @@ const Backdrop = styled.div`
   width: 100%;
 
   background: #f7f7f7;
-`
-
-const LineBackdrop = styled.div`
-  position: absolute;
-  top: 50%;
-
-  opacity: 0.5;
-  width: 100%;
-  height: 10px;
-  background: white;
-
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
-`
-
-interface CircleProps {
-  y: number
-}
-
-const StationCircle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: absolute;
-  top: calc(50% - 1.1em);
-  left: ${(props: CircleProps) => props.y || 20}%;
-
-  width: 3em;
-  height: 3em;
-
-  border-radius: 50%;
-  background: linear-gradient(45deg, #3c8ce7, #00eaff);
-
-  transition: 1s cubic-bezier(0.22, 0.61, 0.36, 1) all;
-
-  cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-
-  &:hover {
-    transform: scale(1.15);
-    background: linear-gradient(45deg, #ed1c24, #fcee21);
-  }
-`
-
-const StationInnerCircle = styled.div`
-  background: white;
-  width: 2.3em;
-  height: 2.3em;
-  border-radius: 50%;
-
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 `
 
 function random<T>(list: T[]): T {
@@ -91,7 +41,7 @@ function randomMetroCurry(): Seller {
   return random(curries)
 }
 
-const metroStations = [
+export const metroStations = [
   // 'หัวลำโพง',
   // 'สามย่าน',
   // 'สีลม',
@@ -112,31 +62,6 @@ const metroStations = [
   'บางซื่อ',
   // 'เตาปูน',
 ]
-
-const StationTitle = styled.div`
-  position: absolute;
-
-  color: #444;
-  font-size: 22px;
-
-  top: 60px;
-  pointer-events: none;
-  text-align: center;
-  white-space: pre;
-`
-
-type StationNodeProps = {
-  idx: number
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-} & CircleProps
-
-const StationNode = ({y, idx, onClick}: StationNodeProps) => (
-  <StationCircle y={y} onClick={onClick}>
-    <StationInnerCircle />
-
-    <StationTitle>{metroStations[idx]}</StationTitle>
-  </StationCircle>
-)
 
 const NextButton = styled.button`
   display: flex;
@@ -163,16 +88,6 @@ const NextButton = styled.button`
     transform: scale(1.2);
   }
 `
-
-const StationSelector = ({index, incr}) => (
-  <>
-    <LineBackdrop />
-    <StationNode y={10} idx={index - 2} onClick={() => incr(-2)} />
-    <StationNode y={25} idx={index - 1} onClick={() => incr(-1)} />
-    <StationNode y={70} idx={index + 1} onClick={() => incr(+1)} />
-    <StationNode y={85} idx={index + 2} onClick={() => incr(+2)} />
-  </>
-)
 
 // function next() {
 //   if (stationIndex > metroStations.length) {
