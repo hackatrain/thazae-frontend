@@ -34,7 +34,7 @@ const Number = styled.div`
   margin-bottom: 0.06em;
 `
 
-export function AirQualityCard() {
+export function TripCard() {
   return (
     <Backdrop>
       <Card>

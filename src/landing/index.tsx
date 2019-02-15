@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import locations from '../thailand-location'
-import {AirQualityMap} from '../pm-map'
-import {AirQualityCard} from '../air-quality-card'
+import {TripCard} from '../trip-card'
 
 const Container = styled.div`
   display: flex;
@@ -17,5 +15,5 @@ const Container = styled.div`
 `
 
 export const Landing = ({path = ''}) => {
-  return <AirQualityCard />
+  return <TripCard />
 }
