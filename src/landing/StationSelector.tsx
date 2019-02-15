@@ -44,6 +44,10 @@ const StationCircle = styled.div`
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 
+  @media (max-width: 600px) {
+    display: none;
+  }
+
   &:hover {
     transform: scale(1.15);
     background: linear-gradient(45deg, #ed1c24, #fcee21);
