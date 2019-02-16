@@ -135,7 +135,7 @@ export const MapMarker = ({lat, lng, onClick, seller}: MarkerProps) => {
   return (
     <PinContainer onClick={onClick}>
       <PinItem type="" />
-      <PinEffect type="" />
+      {/* <PinEffect type="" /> */}
     </PinContainer>
   )
 }
