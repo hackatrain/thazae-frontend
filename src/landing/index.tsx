@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import styled from '@emotion/styled'
-
-import curryList from '../curry/result'
-
-import {TripCard} from '../trip-card'
-import {Seller} from '../curry'
 import {Icon} from 'antd'
+
 import {StationSelector} from './StationSelector'
+
+import {Seller} from '../curry'
+import curryList from '../curry-db'
+import {TripCard} from '../trip-card'
 
 const Backdrop = styled.div`
   display: flex;

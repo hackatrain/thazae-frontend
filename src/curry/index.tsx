@@ -1,8 +1,7 @@
 import * as React from 'react'
-import {useState, useEffect} from 'react'
-import * as ReactDOM from 'react-dom'
+import {useState} from 'react'
 
-import dataset from './result'
+import dataset from '../curry-db'
 
 import './index.css'
 
@@ -11,11 +10,15 @@ type InputChange = React.ChangeEvent<HTMLInputElement>
 export interface Seller {
   name: string
   age: number
-  gender: string
   cost: number
+  gender: string
   location: string
   lineID: string
   image: string
+
+  // Geocoding Result
+  lat?: number
+  lng?: number
 }
 
 function getDataset(): Seller[] {

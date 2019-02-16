@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import {keyframes} from '@emotion/core'
+import {Seller} from '../curry'
 
 /*
   Pin Colors are defined here.
@@ -123,11 +124,18 @@ const PinContainer = styled.div`
   z-index: 1;
 `
 
-export const MapMarker = ({lat, lng, onClick, type}) => {
+interface MarkerProps {
+  seller: Seller
+  lat: number
+  lng: number
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>)
+}
+
+export const MapMarker = ({lat, lng, onClick, seller}: MarkerProps) => {
   return (
     <PinContainer onClick={onClick}>
-      <PinItem type={type} />
-      <PinEffect type={type} />
+      <PinItem type="" />
+      <PinEffect type="" />
     </PinContainer>
   )
 }
